@@ -4,11 +4,15 @@ import {ILink} from "../type";
 
 const categoriesRouter = Router();
 
-categoriesRouter.get('/', async (req, res, next) => {
+categoriesRouter.get('/:shortUrl', async (req, res, next) => {
     try {
-        const result = await Link.find(req.params);
+        const result = await Link.findOne({shortUrl: req.params.shortUrl});
 
-        res.send(result);
+        if (!result) {
+            return res.sendStatus(404);
+        }
+
+        res.status(301).redirect(result.link);
     } catch (e) {
         return next(e);
     }
@@ -19,7 +23,6 @@ categoriesRouter.post('/',async (req, res, next) => {
 
        const alphabet = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
 
-
        let rs = "";
        while (rs.length < 7) {
            rs += alphabet[Math.floor(Math.random() * alphabet.length)];
@@ -27,7 +30,7 @@ categoriesRouter.post('/',async (req, res, next) => {
 
        const linkData: ILink = {
            link: req.body.link,
-           shortUrl: `http://localhost:8000/${rs}`
+           shortUrl: `${rs}`
        }
 
        const link = new Link(linkData);
