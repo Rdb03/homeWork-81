@@ -40,3 +40,32 @@
 .read-the-docs {
   color: #888;
 }
+
+.input-link {
+  width: 1000px;
+  height: 50px;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-link {
+  width: 100px;
+  margin: 30px auto;
+}
+
+.btn-link:hover {
+  background-color: #f9f9f9;
+  color: black;
+}
+
+.btn-link:active {
+  background-color: #787878;
+}
+
+.link {
+  font-size: 30px;
+  font-weight: lighter;
+}
